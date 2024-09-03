@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, Link } from 'react-router-dom';
+import Navbar from "./components/Navbar";
+import Cryptocard from './components/Cryptocard';
+import Cryptocurrencies from './pages/Cryptocurrencies';
+import Homepage from './pages/Homepage';
+import News from './pages/News';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const arr = ['BTC', 'ETH', 'USDT', 'BNB', 'SOL'];
+	return (
+		<div className="app">
+			<div className="navbar">
+				<Navbar />
+			</div>
+			
+			{/* {
+				arr.map((el) => <Cryptocard text={el} />)
+			} */}
+			<div className="main">
+				<Routes>
+					<Route path='/' element={<Homepage />} />
+					<Route path='/cryptocurrencies' element={<Cryptocurrencies />} />
+					<Route path='/news' element={<News />} />
+				</Routes>
+			</div>
+		</div>
+	);
 }
 
 export default App;
