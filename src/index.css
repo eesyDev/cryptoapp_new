@@ -59,3 +59,9 @@ a:hover {
   align-items: center;
   gap: 20px;
 }
+
+.home-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

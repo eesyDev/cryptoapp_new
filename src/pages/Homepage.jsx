@@ -19,14 +19,14 @@ const Homepage = () => {
 				<Col span={12}><Statistic title="Total" value="20000"/></Col>
 				<Col span={12}><Statistic title="Total" value="20000"/></Col>
 			</Row>
-			<Row>
+			<div className='home-heading-container'>
 				<Typography.Title level={2}>
 					Top 12 Cryptos
 				</Typography.Title>
 				<Typography.Title level={3}>
-					<Link to='/cryptocurrencies'></Link>
+					<Link to='/cryptocurrencies'>Show more</Link>
 				</Typography.Title>
-			</Row>
+			</div>
 			<CoinsGrid limited/>
 		</div>
 	)
