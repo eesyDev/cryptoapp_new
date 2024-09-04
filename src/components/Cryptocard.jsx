@@ -2,8 +2,10 @@ import React from 'react'
 
 const Cryptocard = (prop) => {
   return (
-    <div>{prop.text}</div>
+    <div className='card'>
+      <div className="title">{prop.name}</div>
+    </div>
   )
 }
 
-export default Cryptocard
+export default Cryptocard;

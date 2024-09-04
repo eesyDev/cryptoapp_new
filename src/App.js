@@ -13,9 +13,6 @@ function App() {
 				<Navbar />
 			</div>
 			
-			{/* {
-				arr.map((el) => <Cryptocard text={el} />)
-			} */}
 			<div className="main">
 				<Routes>
 					<Route path='/' element={<Homepage />} />
