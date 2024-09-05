@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Statistic, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 
 import CoinsGrid from '../components/CoinsGrid';
 
 // import Cryptocard from '../components/Cryptocard';
+// useState useEffect
 
 const Homepage = () => {
-	
 	return (
 		<div>
 			<Typography.Title>Global Crypto Stats</Typography.Title>
