@@ -51,7 +51,6 @@ const CoinsGrid = ({ limited }) => {
 				}
 			</Row>
 		</div>
-
 	)
 }
 
