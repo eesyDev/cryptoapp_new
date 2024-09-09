@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useGetCoinsQuery } from '../services/cryptoApi';
 import { Card, Row, Col, Input, Avatar } from 'antd';
 import { Link } from 'react-router-dom';
 import millify from 'millify';
 
+import { useGetCoinsQuery } from '../services/cryptoApi';
+import Loader from './Loader';
+
 const CoinsGrid = ({ limited }) => {
 	const limit = limited ? 12 : 48;
-	const { data } = useGetCoinsQuery(limit);
+	const { data, isFetching } = useGetCoinsQuery(limit);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [cryptos, setCryptos] = useState([]);
 
@@ -21,6 +23,7 @@ const CoinsGrid = ({ limited }) => {
 
 		setCryptos(filteredCoins?.length > 0 ? filteredCoins : coins)
 	}, [coins, searchTerm]);
+	if (isFetching) return <Loader/>
 	return (
 		<div>
 			{

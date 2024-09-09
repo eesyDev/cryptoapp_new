@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import millify from 'millify';
-import { Col, Typography } from 'antd';
+import { Col, Typography, Select } from 'antd';
 import { DollarCircleOutlined, NumberOutlined, ThunderboltOutlined, TrophyOutlined, ExclamationCircleOutlined, CheckCircleOutlined, StopOutlined } from '@ant-design/icons';
 import { useGetCoinDetailQuery, useGetCoinPriceHistoryQuery } from '../services/cryptoApi';
 import LineChart from '../components/LineChart';
 
 const CoinDetails = () => {
     const { coinId } = useParams();
-    const {data} = useGetCoinDetailQuery(coinId);
-    const {data : coinHistory} = useGetCoinPriceHistoryQuery({id: coinId, timeperiod: '7d'})
+    const { data, isFetching } = useGetCoinDetailQuery(coinId);
+    const [time, setTime] = useState('7d')
+    const {data : coinHistory} = useGetCoinPriceHistoryQuery({id: coinId, timeperiod: time})
     const cryptoDetails = data?.data?.coin
-    console.log(coinHistory)
+    
+    const timestamps = ['3h', '24h', '3d', '7d', '30d', '1y', '2y'];
+
+    const handleChangePeriod = (val) => {
+      setTime(val)
+    }
 
     const { Title, Text } = Typography;
+    const { Option } = Select;
 
     const coinStats = [
         {title: 'Price to usd', value: `${cryptoDetails?.price && millify(cryptoDetails?.price)}`, icon: <DollarCircleOutlined/>},
@@ -65,12 +72,19 @@ const CoinDetails = () => {
           icon: <TrophyOutlined />,
         },
       ];
+
+  if (isFetching) return <div>Loading ....</div>
   return (
     <Col className='coin-details-container'>
       <Col className='coin-heading-container'>
         <Title className='coin-name'>{cryptoDetails?.name}</Title>
         <Text>{cryptoDetails?.name} live price in US Dollar (USD). View value statistics, market cap and supply</Text>
       </Col>
+      <Select placeholder="Choose a time" onChange={(value) => handleChangePeriod(value)}>
+        {
+          timestamps.map((el, i) => <Option key={i} value={el}>{el}</Option>)
+        }
+      </Select>
       <LineChart coinName={cryptoDetails?.name} coinHistory={coinHistory} currentPrice={cryptoDetails?.price}/>
       <Col className='stats-container'>
           <Col className='coin-value-statistics mt-8'>
